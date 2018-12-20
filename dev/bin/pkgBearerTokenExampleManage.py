@@ -94,7 +94,7 @@ from  bisos.platform import bxPlatformThis
 from  bisos.platform import bxPlatformConfig
 
 from unisos.common import icmsPkgLib
-from unisos.marme import marmePkgThis
+from roPerf.bearerTokenExample import bearerTokenExample_pkgThis
 
 
 g_importedCmnds = {        # Enumerate modules from which CMNDs become invokable
@@ -177,31 +177,6 @@ class icmOverview(icm.Cmnd):
                 
         return(format(str(__doc__)+moduleDescription))
 ####+END:
-
-
-        
-####+BEGIN: bx:icm:python:func :funcName "canon_pythonPkgsSpec" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-anyOrNone :: /canon_pythonPkgsSpec/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
-"""
-def canon_pythonPkgsSpec(
-):
-####+END:
-    pkgs = collections.OrderedDict()
-    pkgs["notmuch"] = None
-    pkgs["flufl.bounce"] = "2.3"
-    return pkgs
-
-####+BEGIN: bx:icm:python:func :funcName "canon_linuxPkgsSpec" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-anyOrNone :: /canon_linuxPkgsSpec/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
-"""
-def canon_linuxPkgsSpec(
-):
-####+END:
-    pkgs = collections.OrderedDict()
-    pkgs["offlineimap"] = None
-    return pkgs
 
 
 ####+BEGIN: bx:icm:python:section :title "= =Framework::= ICM Hooks ="
@@ -335,49 +310,21 @@ class examples(icm.Cmnd):
 ####+END:
 
         icm.cmndExampleMenuChapter('*General Dev and Testing IIFs*')
-
-        cmndName = "unitTest"
-
-        cmndArgs = "" 
-        cps = cpsInit() ; # cps['icmsPkgName'] = icmsPkgName 
-        icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='little')
-        icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='full')        
-        
-        icm.cmndExampleMenuChapter('*BinsPreps*')
-
-        cmndAction = " -i binsPreps" ; cmndArgs = ""
-        menuLine = """{cmndAction} {cmndArgs}""".format(cmndAction=cmndAction, cmndArgs=cmndArgs)
-        icm.cmndExampleMenuItem(menuLine, verbosity='none')
-
-        cmndAction = " -i binsPrepsCurInfo" ; cmndArgs = ""
-        menuLine = """{cmndAction} {cmndArgs}""".format(cmndAction=cmndAction, cmndArgs=cmndArgs)
-        icm.cmndExampleMenuItem(menuLine, verbosity='none')
-
-        icm.cmndExampleMenuSection('*Install ICMs Needed Linux Packages*')
-        
-        cmndAction = " -i canon_linuxPkgInstall" ; cmndArgs = ""
-        menuLine = """{cmndAction} {cmndArgs}""".format(cmndAction=cmndAction, cmndArgs=cmndArgs)
-        icm.cmndExampleMenuItem(menuLine, verbosity='none')
-
-        icm.cmndExampleMenuSection('*Install ICMs Needed Python Packages*')
-        
-        cmndAction = " -i canon_pythonPkgInstall" ; cmndArgs = ""
-        menuLine = """{cmndAction} {cmndArgs}""".format(cmndAction=cmndAction, cmndArgs=cmndArgs)
-        icm.cmndExampleMenuItem(menuLine, verbosity='none')
         
         #
         # ICMs PKG Information
         #
 
-        icmsPkgInfoBaseDir = marmePkgThis.icmsPkgBase_dir()
+        icmsPkgInfoBaseDir = bearerTokenExample_pkgThis.icmsPkgBase_dir()
 
-        print icmsPkgInfoBaseDir
+        print(icmsPkgInfoBaseDir)
 
         icmsPkgLib.examples_pkgInfoParsFull(
             icmsPkgNameSpecification(),
             icmsPkgInfoBaseDir=icmsPkgInfoBaseDir,
-            icmsPkgControlBaseDir=icmsPkgControlBaseDirDefault(),
-            icmsPkgRunBaseDir=icmsPkgRunBaseDirDefault(),
+            icmsPkgModuleBaseDir="/tmp",            
+            icmsPkgControlBaseDir="/tmp",
+            icmsPkgRunBaseDir="/tmp",
         )
 
 
@@ -432,302 +379,6 @@ def icmsPkgControlBaseDirDefault():    return os.path.abspath(os.path.join("NOTY
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  icmsPkgRunBaseDirDefault    [[elisp:(org-cycle)][| ]]
 """
 def icmsPkgRunBaseDirDefault():    return os.path.expanduser("~/byStarRunEnv")
-
-####+BEGIN: bx:icm:python:cmnd:classHead :modPrefix "new" :cmndName "binsPreps" :comment "" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /binsPreps/ parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class binsPreps(icm.Cmnd):
-    cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
-    cmndArgsLen = {'Min': 0, 'Max': 0,}
-
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-    def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-
-        callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-####+END:
-        pkgsList = canon_pythonPkgsSpec()
-        for pkgName in pkgsList:
-            pkgVersion = pkgsList[pkgName]
-            canon_pythonPkgInstall(pkgName, pkgVersion)
-
-        pkgsList = canon_linuxPkgsSpec()
-        for pkgName in pkgsList:
-            pkgVersion = pkgsList[pkgName]
-            canon_linuxPkgInstall(pkgName, pkgVersion)
-            
-        
-        return cmndOutcome.set(
-            opError=icm.OpError.Success,
-            opResults=None,
-        )
-
-####+BEGIN: bx:icm:python:cmnd:classHead :modPrefix "new" :cmndName "binsPrepsCurInfo" :comment "" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd       :: /binsPrepsCurInfo/ parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
-"""
-class binsPrepsCurInfo(icm.Cmnd):
-    cmndParamsMandatory = [ ]
-    cmndParamsOptional = [ ]
-    cmndArgsLen = {'Min': 0, 'Max': 0,}
-
-    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
-    def cmnd(self,
-        interactive=False,        # Can also be called non-interactively
-    ):
-        cmndOutcome = self.getOpOutcome()
-        if interactive:
-            if not self.cmndLineValidate(outcome=cmndOutcome):
-                return cmndOutcome
-
-        callParamsDict = {}
-        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
-            return cmndOutcome
-####+END:
-        #G = icm.IcmGlobalContext()
-        #g_runArgs = G.icmRunArgsGet()
-
-        #
-        # Python Packages
-        #
-        pkgsList = canon_pythonPkgsSpec()
-        for pkgName in pkgsList:
-            # Not all packages ahve __version__ so this is not reliable
-            #exec("import {pyModule}".format(pyModule=each))
-            #exec("print {pyModule}.__version__".format(pyModule=each))
-
-            installedVer = pythonPkg_versionGet(pkgName)
-
-            installedLoc = pythonPkg_locationGet(pkgName)
-            
-            icm.ANN_write(
-                "Python:: pkgName={pkgName} -- expectedVer={expectedVer} -- installedVer={installedVer} -- installedLoc={installedLoc}"
-                .format(pkgName=pkgName,
-                        expectedVer=pkgsList[pkgName],
-                        installedVer=installedVer,
-                        installedLoc=installedLoc,
-                ))
-            
-        #
-        # Linux Packages
-        #
-        pkgsList = canon_linuxPkgsSpec()
-        for pkgName in pkgsList:
-
-            installedVer = linuxPkg_versionGet(pkgName)
-            
-            icm.ANN_write(
-                "Linux::  pkgName={pkgName} -- expectedVer={expectedVer} -- installedVer={installedVer}"
-                .format(pkgName=pkgName,
-                        expectedVer=pkgsList[pkgName],
-                        installedVer=installedVer,
-                ))
-            
-        return cmndOutcome.set(
-            opError=icm.OpError.Success,
-            opResults=None,
-        )
-    
-
-####+BEGIN: bx:icm:python:section :title "Supporting Classes And Functions"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Supporting Classes And Functions*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-"""
-*       /Empty/  [[elisp:(org-cycle)][| ]]
-"""
-
-
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  canon_linuxPkgInstall    [[elisp:(org-cycle)][| ]]
-"""
-def canon_linuxPkgInstall(
-        pkgName,
-        pkgVersion,
-):
-    """
-** Install a given Linux pkg based on its canonical name and version.
-"""
-    distroName = platform.linux_distribution()[0]
-    
-    if  distroName == "Ubuntu":
-        return linuxPkgInstall_aptGet(pkgName, pkgVersion)
-    elif distroName == "Redhat":
-        return linuxPkgInstall_yum(pkgName, pkgVersion)
-    else:
-        icm.EH_problem_info("Unsupported Distribution == {}".format(distroName))
-        return
-
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  linuxPkgInstall_ubuntu    [[elisp:(org-cycle)][| ]]
-"""
-def linuxPkgInstall_aptGet(
-        pkgName,
-        pkgVersion,
-):
-    """
-** Install a given linux pkg with apt-get based on its canonical name and version.
-"""
-    installedVersion = linuxPkg_versionGet(pkgName)
-    if pkgVersion:
-        if installedVersion == pkgVersion:
-            icm.ANN_write("Linux::  {pkgName} ver={ver} (as expected) is already installed -- skipped".format(
-                pkgName=pkgName, ver=installedVersion))
-            return
-        else:
-            outcome = icm.subProc_bash(
-                """echo NOTYET pip install {pkgName}=={pkgVersion}"""
-                .format(pkgName=pkgName, pkgVersion=pkgVersion)
-            ).log()
-            if outcome.isProblematic(): return icm.EH_badOutcome(outcome)
-            resultStr = outcome.stdout.strip()
-            icm.ANN_write(resultStr)
-            return
-
-    installedVersion = linuxPkg_versionGet(pkgName)
-    if installedVersion:
-        icm.ANN_write("Linux::  {pkgName} ver={ver} (as any) is already installed -- skipped".format(
-            pkgName=pkgName, ver=installedVersion))
-        return
-    else:
-        outcome = icm.subProc_bash(
-            """sudo apt-get install {pkgName}"""
-            .format(pkgName=pkgName)
-        ).log()
-        if outcome.isProblematic(): return icm.EH_badOutcome(outcome)
-        resultStr = outcome.stdout.strip()
-        icm.ANN_write(resultStr)
-        return
-
-
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  linuxPkgInstall_redhat    [[elisp:(org-cycle)][| ]]
-"""
-def linuxPkgInstall_yum(
-        pkgName,
-        pkgVersion,
-):
-    """
-** Install a given linux pkg with yum based on its canonical name and version.
-"""
-
-    outcome = icm.subProc_bash(
-        """sudo yum install {pkgName}"""
-        .format(pkgName=pkgName)
-    ).log()
-    if outcome.isProblematic(): return icm.EH_badOutcome(outcome)
-    resultStr = outcome.stdout.strip()
-    icm.ANN_write(resultStr)
-    return
-
-
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  linuxPkg_versionGet    [[elisp:(org-cycle)][| ]]
-"""
-def linuxPkg_versionGet(
-        pkgName,
-):
-    """
-** Return version as string if Python pkgName is installed
-** Return None if Python pkgName is not installed
-"""
-    dpkgQueryOpts = """dpkg-query --show --showformat='${db:Status-Status}\n'"""
-    outcome = icm.subProc_bash(
-        """{dpkgQueryOpts} {pkgName}"""
-        .format(dpkgQueryOpts=dpkgQueryOpts, pkgName=pkgName)
-    ).log()
-    if outcome.isProblematic():
-        icm.EH_badOutcome(outcome)
-        return None
-
-    resultStr = outcome.stdout.strip()
-    if resultStr == "":
-        return None
-    
-    dpkgQueryOpts = """dpkg-query --show --showformat='${Version}\n'"""
-    outcome = icm.subProc_bash(
-        """{dpkgQueryOpts} {pkgName}"""
-        .format(dpkgQueryOpts=dpkgQueryOpts, pkgName=pkgName)
-    ).log()
-    if outcome.isProblematic():
-        icm.EH_badOutcome(outcome)
-        return None
-    
-    resultStr = outcome.stdout.strip()
-    if resultStr == "":
-        return None
-    else:
-        return resultStr
-
-
-
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  canon_pythonPkgInstall    [[elisp:(org-cycle)][| ]]
-"""
-def canon_pythonPkgInstall(
-        pkgName,
-        pkgVersion,
-):
-    """
-** Install a given Python pkg based on its canonical name and version.
-"""
-    return pythonPkg_install_pip(pkgName, pkgVersion)    
-
-"""
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  pythonPkg_install_ubuntu    [[elisp:(org-cycle)][| ]]
-"""
-def pythonPkg_install_pip(
-        pkgName,
-        pkgVersion,
-):
-    """
-** Install a given Python pkg based on its canonical name and version.
-If version is specified,  the package is installed or updated to that version.
-If version is None, 
-    if package is already installed no action is taken
-    if package is not installed, the latest is installed
-"""
-    installedVersion = pythonPkg_versionGet(pkgName)
-    if pkgVersion:
-        if installedVersion == pkgVersion:
-            icm.ANN_write("Python:: {pkgName} ver={ver} (as expected) is already installed -- skipped".format(
-                pkgName=pkgName, ver=installedVersion))
-            return
-        else:
-            outcome = icm.subProc_bash(
-                """echo pip install {pkgName}=={pkgVersion}"""
-                .format(pkgName=pkgName, pkgVersion=pkgVersion)
-            ).log()
-            if outcome.isProblematic(): return icm.EH_badOutcome(outcome)
-            resultStr = outcome.stdout.strip()
-            icm.ANN_write(resultStr)
-            return
-
-    installedVersion = pythonPkg_versionGet(pkgName)
-    if installedVersion:
-        icm.ANN_write("Python:: {pkgName} ver={ver} (as any) is already installed -- skipped".format(
-            pkgName=pkgName, ver=installedVersion))
-        return
-    else:
-        outcome = icm.subProc_bash(
-            """echo pip install {pkgName}"""
-            .format(pkgName=pkgName)
-        ).log()
-        if outcome.isProblematic(): return icm.EH_badOutcome(outcome)
-        resultStr = outcome.stdout.strip()
-        icm.ANN_write(resultStr)
-        return
-
 
 """
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  pythonPkg_versionGet    [[elisp:(org-cycle)][| ]]
