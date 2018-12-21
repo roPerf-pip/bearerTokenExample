@@ -189,11 +189,11 @@ This module is part of BISOS and its primary documentation is in  http://www.by-
 """
 ####+END:
 
-####+BEGIN: bx:icm:python:func :funcName "icmsPkgBase_dir" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "bxoId=None sr=None"
+####+BEGIN: bx:icm:python:func :funcName "icmsPkgBase_dir_DEFUNCT" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "bxoId=None sr=None"
 """
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || Func-anyOrNone :: /icmsPkgBase_dir/ retType=bool argsList=(bxoId=None sr=None)  [[elisp:(org-cycle)][| ]]
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /icmsPkgBase_dir_DEFUNCT/ retType=bool argsList=(bxoId=None sr=None)  [[elisp:(org-cycle)][| ]]
 """
-def icmsPkgBase_dir(
+def icmsPkgBase_dir_DEFUNCT(
     bxoId=None,
     sr=None,
 ):
@@ -205,6 +205,19 @@ def icmsPkgBase_dir(
     icmsModulePath = os.path.dirname(__file__)
     icmsPkgBaseDir = "{}-config".format(icmsModulePath)
     return icmsPkgBaseDir
+
+####+BEGIN: bx:icm:python:func :funcName "pkgBase_moduleDir" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
+"""
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /pkgBase_moduleDir/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
+"""
+def pkgBase_modulesDir():
+####+END:
+    """
+** Return the icmsPkg's base module (lib) directory.
+"""
+    return os.path.dirname(__file__)
+
+
 
 ####+BEGIN: bx:icm:python:func :funcName "pkgBase_baseDir" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
 """
