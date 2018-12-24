@@ -66,7 +66,7 @@ icmInfo = {
 
 ####+BEGIN: bx:icm:python:icmItem :itemType "=Imports=" :itemTitle "*IMPORTS*"
 """
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || =Imports=      :: *IMPORTS*  [[elisp:(org-cycle)][| ]]
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  =Imports=      :: *IMPORTS*  [[elisp:(org-cycle)][| ]]
 """
 ####+END:
 
@@ -101,6 +101,7 @@ g_importedCmnds = {        # Enumerate modules from which CMNDs become invokable
     'bleep': bleep.__file__,
     'bxPlatformConfig': bxPlatformConfig.__file__,    
     'icmsPkgLib': icmsPkgLib.__file__,
+    'bearerTokenExample_pkgThis': bearerTokenExample_pkgThis.__file__,    
 }
 
 
@@ -269,7 +270,7 @@ def g_argsExtraSpecify(
 
 ####+BEGIN: bx:icm:python:cmnd:classHead :modPrefix "new" :cmndName "examples" :cmndType "ICM-Cmnd-FWrk"  :comment "FrameWrk: ICM Examples" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "0" :asFunc "" :interactiveP ""
 """
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children)][|V]] [[elisp:(org-tree-to-indirect-buffer)][|>]] [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || ICM-Cmnd-FWrk  :: /examples/ =FrameWrk: ICM Examples= parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  ICM-Cmnd-FWrk  :: /examples/ =FrameWrk: ICM Examples= parsMand= parsOpt= argsMin=0 argsMax=0 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
 """
 class examples(icm.Cmnd):
     cmndParamsMandatory = [ ]
@@ -288,6 +289,7 @@ class examples(icm.Cmnd):
         callParamsDict = {}
         if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
             return cmndOutcome
+
 ####+END:
         def cpsInit(): return collections.OrderedDict()
         def menuItem(): icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='little')
@@ -302,31 +304,7 @@ class examples(icm.Cmnd):
 
         bleep.examples_icmBasic()
 
-        
-####+BEGIN: bx:icm:python:cmnd:subSection :title "Dev And Testing"
-        """
-**  [[elisp:(beginning-of-buffer)][Top]] ================ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *Dev And Testing*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-
-        icm.cmndExampleMenuChapter('*General Dev and Testing IIFs*')
-        
-        #
-        # ICMs PKG Information
-        #
-
-        icmsPkgInfoBaseDir = bearerTokenExample_pkgThis.icmsPkgBase_dir()
-
-        print(icmsPkgInfoBaseDir)
-
-        icmsPkgLib.examples_pkgInfoParsFull(
-            icmsPkgNameSpecification(),
-            icmsPkgInfoBaseDir=icmsPkgInfoBaseDir,
-            icmsPkgModuleBaseDir="/tmp",            
-            icmsPkgControlBaseDir="/tmp",
-            icmsPkgRunBaseDir="/tmp",
-        )
-
+        bearerTokenExample_pkgThis.examples_pkgThis()        
 
         #def execLineEx(cmndStr): icm.ex_gExecMenuItem(execLine=cmndStr)
         #execLineEx("""ls""")
@@ -375,17 +353,35 @@ def icmsPkgNameSpecification():    return "marme.dev"
 #def icmsPkgControlBaseDirDefault():    return os.path.abspath(os.path.join(platformControlBaseDir, "pkgs", "marme"))
 def icmsPkgControlBaseDirDefault():    return os.path.abspath(os.path.join("NOTYET", "pkgs", "marme"))
 
+    
+    
+####+BEGIN: bx:icm:python:section :title "Common/Generic Facilities -- Library Candidates"
+"""
+*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Common/Generic Facilities -- Library Candidates*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+"""
+####+END:
+
+
+
 """
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  icmsPkgRunBaseDirDefault    [[elisp:(org-cycle)][| ]]
 """
 def icmsPkgRunBaseDirDefault():    return os.path.expanduser("~/byStarRunEnv")
 
+
 """
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  pythonPkg_versionGet    [[elisp:(org-cycle)][| ]]
 """
+
+####+BEGIN: bx:icm:python:func :funcName "pythonPkg_versionGet" :funcType "anyOrNone" :retType "bool" :deco "default" :argsList "pkgName"
+"""
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /pythonPkg_versionGet/ retType=bool argsList=(pkgName) deco=default  [[elisp:(org-cycle)][| ]]
+"""
+@icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
 def pythonPkg_versionGet(
-        pkgName,
+    pkgName,
 ):
+####+END:
     """
 ** Return version as string if Python pkgName is installed
 ** Return None if Python pkgName is not installed
@@ -404,12 +400,14 @@ def pythonPkg_versionGet(
     else:
         return resultStr
 
+####+BEGIN: bx:icm:python:func :funcName "pythonPkg_locationGet" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "pkgName"
 """
-*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || IIF       ::  pythonPkg_locationGet    [[elisp:(org-cycle)][| ]]
-"""    
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /pythonPkg_locationGet/ retType=bool argsList=(pkgName)  [[elisp:(org-cycle)][| ]]
+"""
 def pythonPkg_locationGet(
-        pkgName,
+    pkgName,
 ):
+####+END:
     """
 ** Return location as string if Python pkgName is installed
 ** Return None if Python pkgName is not installed
@@ -429,15 +427,7 @@ def pythonPkg_locationGet(
         return resultStr
     
 
-    
-####+BEGIN: bx:icm:python:section :title "Common/Generic Facilities -- Library Candidates"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ################ [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Common/Generic Facilities -- Library Candidates*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
-"""
-####+END:
-"""
-*       /Empty/  [[elisp:(org-cycle)][| ]]
-"""
+
 
     
 ####+BEGIN: bx:icm:python:section :title "= =Framework::=   G_main -- Instead Of ICM Dispatcher ="

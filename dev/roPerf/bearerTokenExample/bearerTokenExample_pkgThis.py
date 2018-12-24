@@ -70,8 +70,8 @@ icmInfo = {
 ####+END:
 
 import os
-#import collections
-#import enum
+import collections
+import enum
 
 
 ####+BEGIN: bx:dblock:global:file-insert :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/importUcfIcmG.py"
@@ -182,6 +182,128 @@ This module is part of BISOS and its primary documentation is in  http://www.by-
 
         return cmndArgsSpecDict
 ####+END:
+
+
+####+BEGIN: bx:icm:python:section :title "Common Examples Section"
+"""
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Common Examples Section*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+"""
+####+END:
+
+####+BEGIN: bx:icm:python:func :funcName "examples_pkgThis" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
+"""
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /examples_pkgThis/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
+"""
+def examples_pkgThis():
+####+END:
+    """."""
+
+    def cpsInit(): return collections.OrderedDict()
+    def menuItem(verbosity): icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity=verbosity) # 'little' or 'none'
+    def execLineEx(cmndStr): icm.ex_gExecMenuItem(execLine=cmndStr)
+
+####+BEGIN: bx:icm:python:cmnd:subSection :title "This Package Bases" :context "func-1"
+    """
+**  [[elisp:(beginning-of-buffer)][Top]] ============== [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]          *This Package Bases*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+"""
+####+END:
+    icm.cmndExampleMenuChapter('*This Package Bases*')
+
+    cmndName = "thisPkgBases" ;  cmndArgs = ""
+    cps=cpsInit() ; menuItem(verbosity='none')
+
+    cmndName = "thisPkgBases" ;  cmndArgs = "pkgBase_baseDir"
+    cps=cpsInit() ; menuItem(verbosity='none')
+    
+    return
+
+
+####+BEGIN: bx:icm:python:section :title "Common ICMs Section"
+"""
+*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *Common ICMs Section*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]] 
+"""
+####+END:
+
+####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "thisPkgBases" :comment "" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "999" :asFunc "" :interactiveP ""
+"""
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  ICM-Cmnd       :: /thisPkgBases/ parsMand= parsOpt= argsMin=0 argsMax=999 asFunc= interactive=  [[elisp:(org-cycle)][| ]]
+"""
+class thisPkgBases(icm.Cmnd):
+    cmndParamsMandatory = [ ]
+    cmndParamsOptional = [ ]
+    cmndArgsLen = {'Min': 0, 'Max': 999,}
+
+    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmnd(self,
+        interactive=False,        # Can also be called non-interactively
+        argsList=[],         # or Args-Input
+    ):
+        cmndOutcome = self.getOpOutcome()
+        if interactive:
+            if not self.cmndLineValidate(outcome=cmndOutcome):
+                return cmndOutcome
+            effectiveArgsList = G.icmRunArgsGet().cmndArgs
+        else:
+            effectiveArgsList = argsList
+
+        callParamsDict = {}
+        if not icm.cmndCallParamsValidate(callParamsDict, interactive, outcome=cmndOutcome):
+            return cmndOutcome
+
+        cmndArgsSpecDict = self.cmndArgsSpec()
+        if not self.cmndArgsValidate(effectiveArgsList, cmndArgsSpecDict, outcome=cmndOutcome):
+            return cmndOutcome
+####+END:
+        actions = self.cmndArgsGet("0&3", cmndArgsSpecDict, effectiveArgsList)
+        if actions[0] == "all":
+            cmndArgsSpec = cmndArgsSpecDict.argPositionFind("0&3")
+            argChoices = cmndArgsSpec.argChoicesGet()
+            argChoices.pop(0)
+            actions = argChoices
+        for each in actions:
+            if interactive:
+                exec("""retVal = {}()""".format(each))
+                print("""{each}={retVal}""".format(each=each, retVal=retVal))
+                
+        return cmndOutcome.set(
+            opError=icm.OpError.Success,
+            opResults=None,
+        )
+
+####+BEGIN: bx:icm:python:method :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+    """
+**  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Method-anyOrNone :: /cmndArgsSpec/ retType=bool argsList=nil deco=default  [[elisp:(org-cycle)][| ]]
+"""
+    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmndArgsSpec(self):
+####+END:        
+        """
+***** Cmnd Args Specification
+"""
+        cmndArgsSpecDict = icm.CmndArgsSpecDict()
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="0&3",
+            argName="actions",
+            argDefault='all',
+            argChoices=['all', 'pkgBase_modulesDir', 'pkgBase_configDir', 'pkgBase_baseDir',],
+            argDescription="Output BaseDir Of All Or Those Specified",
+        )
+
+        return cmndArgsSpecDict
+
+
+####+BEGIN: bx:icm:python:method :methodName "cmndDocStr" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+    """
+**  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Method-anyOrNone :: /cmndDocStr/ retType=bool argsList=nil deco=default  [[elisp:(org-cycle)][| ]]
+"""
+    @icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmndDocStr(self):
+####+END:        
+        return """
+***** TODO [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Place holder for this commands doc string.
+"""
+
+
  
 ####+BEGIN: bx:dblock:python:section :title "Support Functions For MsgProcs"
 """
@@ -206,9 +328,9 @@ def icmsPkgBase_dir_DEFUNCT(
     icmsPkgBaseDir = "{}-config".format(icmsModulePath)
     return icmsPkgBaseDir
 
-####+BEGIN: bx:icm:python:func :funcName "pkgBase_moduleDir" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
+####+BEGIN: bx:icm:python:func :funcName "pkgBase_modulesDir" :funcType "anyOrNone" :retType "bool" :deco "" :argsList ""
 """
-*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /pkgBase_moduleDir/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  Func-anyOrNone :: /pkgBase_modulesDir/ retType=bool argsList=nil  [[elisp:(org-cycle)][| ]]
 """
 def pkgBase_modulesDir():
 ####+END:

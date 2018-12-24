@@ -73,12 +73,15 @@ svcBaseName="bearerTokenExample"
 svcSpecPortNu="8080"
 
 # /de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec
-workaroundBaseDir="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample"
+pkgBaseDir=$( source /bisos/venv/dev-py2-bisos-3/bin/activate; pkgBearerTokenExampleManage.py  -i thisPkgBases pkgBase_baseDir | cut -d '=' -f 2 )
 
-svcSpecYaml="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec/${svcBaseName}.yaml"
-svcSpecJson="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec/${svcBaseName}.json"
-svcSpecJsonDeref="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec/${svcBaseName}Deref.json"
+#svcSpecYaml="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec/${svcBaseName}.yaml"
+#svcSpecJson="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec/${svcBaseName}.json"
+#svcSpecJsonDeref="/de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base/svcSpec/${svcBaseName}Deref.json"
 
+svcSpecYaml="${pkgBaseDir}/svcSpec/${svcBaseName}.yaml"
+svcSpecJson="${pkgBaseDir}/svcSpec/${svcBaseName}.json"
+svcSpecJsonDeref="${pkgBaseDir}/svcSpec/${svcBaseName}Deref.json"
 
 function G_postParamHook {
      return 0
@@ -107,7 +110,7 @@ ${G_myName} ${extraInfo} -i apiCodeGenPyFlask ${svcSpecYaml} /tmp/${svcBaseName}
 $( examplesSeperatorSection "Update All Generated Code -- ${svcBaseName}" )
 ${G_myName} ${extraInfo} -i updateAll ${svcSpecYaml} ${svcBaseName}
 $( examplesSeperatorSection "Start PyFLask Server -- ${svcBaseName}" )
-${G_myName} ${extraInfo} -i serverStart /de/bx/nne/dev-py/pypi/pkgs/roPerf/bearerTokenExample/dev/roPerf/bearerTokenExample-base /tmp/${svcBaseName}PerfGen 
+${G_myName} ${extraInfo} -i serverStart ${pkgBaseDir} /tmp/${svcBaseName}PerfGen 
 $( examplesSeperatorSection "Clean Generated Code -- ${svcBaseName}" )
 ${G_myName} ${extraInfo} -i codeGenClean ${svcBaseName}PerfGen
 _EOF_
