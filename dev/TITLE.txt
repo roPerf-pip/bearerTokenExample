@@ -1,2 +1,0 @@
-BearerTokenExample Web Service
-
