@@ -8,6 +8,8 @@ roPerf.bearerTokenExample
 
 Bearer Token Example Web Services
 
+OBSOLETED: Absorbed in bisos.mmwsIcm
+
 Support
 =======
 
