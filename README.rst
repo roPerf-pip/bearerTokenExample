@@ -1,7 +1,6 @@
 =========================
 roPerf.bearerTokenExample
 =========================
-
 .. contents::
    :depth: 3
 ..
